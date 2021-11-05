@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Icon, Tooltip } from 'citric'
+import { goTo } from 'core/history/history'
 import React, { ReactElement, useEffect, useState } from 'react'
+import { useLocation } from 'react-router'
 import constants from '../../../constants/constants'
-// import { history } from '../../../containers/history/history'
 import { MenuModule } from '../../../data/protocols/data/menu'
 import { selectMenuOption } from '../../../store/menu-option/menu-option.actions'
 import { useStore } from '../../../store/store'
@@ -24,25 +26,27 @@ export const MenuOption: React.FC<MenuOptionProps> = ({
   const [selected, setSelected] = useState(false)
   const { store, dispatch } = useStore()
   const { menuOptionSelected } = store as { menuOptionSelected: MenuModule }
+  const { pathname } = useLocation()
+  const { DASHBOARD } = constants.ROUTES
 
   const handleMenuOptionClick = (module: MenuModule): void => {
     if (!module.contexts || module.contexts.length === 0) {
-      // history.push(module.route)
+      goTo(module.route)
     }
     dispatch(selectMenuOption(module))
   }
 
   useEffect(() => {
-    // const historyPath = history.asPath.split('#state=')[0].match(/[^/\s]+\//)
-    // const moduleRoute = module.route.replace(/\//g, '')
-    // if (
-    //   historyPath !== null &&
-    //   historyPath[0].replace(/\//g, '') === moduleRoute
-    // ) {
-    //   setSelected(true)
-    // } else if (historyPath === null && module.moduleName === HOME) {
-    //   setSelected(true)
-    // }
+    const { route } = module
+
+    if (pathname === DASHBOARD && route === DASHBOARD) {
+      setSelected(true)
+    }
+
+    if (route !== DASHBOARD) {
+      const pathAndRouteMatch = pathname.includes(route)
+      setSelected(pathAndRouteMatch)
+    }
   }, [])
 
   useEffect(() => {

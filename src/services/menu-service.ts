@@ -6,7 +6,6 @@ import platformApi from './platform-api'
 const { BASE_PATH, MODULES } = constants.URL.MENU
 
 const getModules = async (): Promise<HttpResponse<MenuModule[]>> => {
-  console.log('getCurrentUser')
   return platformApi.get(`${BASE_PATH}${MODULES}`)
 }
 

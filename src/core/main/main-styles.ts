@@ -15,3 +15,12 @@ export const AppContainer = styled.div`
 export const AppContent = styled.div`
   display: flex;
 `
+
+// export const AppContainer = styled.div`
+//   display: flex;
+//   display: flex;
+//   float: 1;
+//   flex: 1;
+//   justify-content: center;
+//   align-items: center;
+// `

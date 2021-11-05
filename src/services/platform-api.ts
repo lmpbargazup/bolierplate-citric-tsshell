@@ -5,7 +5,6 @@ import httpClient from './http-client'
 const { BASE_URL } = constants.URL.HOST
 
 const get = async (url: string, params?: any): Promise<HttpResponse> => {
-  console.log('get', url, params)
   return httpClient.request({
     url: `${BASE_URL}${url}`,
     method: GET,

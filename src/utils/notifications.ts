@@ -2,10 +2,8 @@ import strings from '../constants/strings'
 import styles from '../constants/styles'
 import { SolveButtonProps } from '../containers/navbar/components/navbar-notifications/navbar-notifications-styles'
 
-const {
-  CLICK_HERE_SOLVE,
-  CHECK_IT_OUT
-} = strings.CONTAINERS.NAVBAR.NAVBAR_NOTIFICATIONS
+const { CLICK_HERE_SOLVE, CHECK_IT_OUT } =
+  strings.CONTAINERS.NAVBAR.NAVBAR_NOTIFICATIONS
 
 type NotificationDynamicProperties = {
   lineColor: string

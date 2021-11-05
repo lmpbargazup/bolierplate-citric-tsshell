@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Vertical } from '../../../../components/spacings/vertical/vertical'
 import constants from '../../../../constants/constants'
 import strings from '../../../../constants/strings'
-import { Module } from '../../../../utils/module-federation'
 import {
   CardButtonLoader,
   CardContainer,
@@ -110,7 +109,7 @@ export const Card: React.FC<CardProps> = ({
             showChildren={showWidget}
             data-testid={WIDGET_CONTAINER}
           >
-            <Module
+            {/* <Module
               system={{
                 url,
                 scope,
@@ -118,7 +117,7 @@ export const Card: React.FC<CardProps> = ({
                 component
               }}
               setLoading={setLoading}
-            />
+            /> */}
           </CardWidgetContainer>
         </CardContentContainer>
       )}

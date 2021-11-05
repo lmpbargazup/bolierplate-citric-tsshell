@@ -3,9 +3,10 @@ import Citric from 'citric'
 import { Menu } from 'components/menu/menu'
 import { Navbar } from 'components/navbar/navbar'
 import { ToastNotification } from 'components/toast-notification/toast-notification'
-import { goToServerErrorPage } from 'containers/history/history'
+import { SubMenu } from 'containers/sub-menu/sub-menu'
 import { GlobalStyle } from 'core/styles/global'
 import React, { ReactElement, useEffect, useState } from 'react'
+import { useLocation } from 'react-router'
 import menuService from 'services/menu-service'
 import userManagerService from 'services/user-manager-service'
 import { MenuModule } from 'src/data/protocols/data/menu'
@@ -24,6 +25,7 @@ export function Main({ children }: MainProps) {
   const { dispatch, store } = useStore()
   const [showMenu, setShowMenu] = useState(true)
   const [showSubMenu, setShowSubMenu] = useState(false)
+  const { pathname } = useLocation()
 
   const { menuOptionSelected } = store as { menuOptionSelected: MenuModule }
   const { menuOptionWasSelected } = store as { menuOptionWasSelected: boolean }
@@ -40,17 +42,15 @@ export function Main({ children }: MainProps) {
   }
 
   const loadCurrentUser = async (): Promise<void> => {
-    console.log('loadCurrentUser', userManagerService)
     try {
       const response = await userManagerService.getCurrentUser()
-      console.log(response.body)
       dispatch(setUser(response.body as UserData))
     } catch (error) {
-      goToServerErrorPage()
+      // goToServerErrorPage()
     }
   }
 
-  const verifyIfIsErrorRoute = (location = history.pathname): void => {
+  const verifyIfIsErrorRoute = (location = pathname): void => {
     const currentRoute = location
     const errorRoutes = Object.values([PAGE_NOT_FOUND, SERVER_ERROR])
     setShowMenu(!errorRoutes.includes(currentRoute))
@@ -67,7 +67,7 @@ export function Main({ children }: MainProps) {
   }, [])
 
   useEffect(() => {
-    verifyIfIsErrorRoute(history.pathname)
+    verifyIfIsErrorRoute(pathname)
   }, [history])
 
   useEffect(() => {
@@ -87,6 +87,12 @@ export function Main({ children }: MainProps) {
           {showMenu && <Navbar />}
           <AppContent>
             {showMenu && <Menu />}
+            {showSubMenu && (
+              <SubMenu
+                menuOptionSelected={menuOptionSelected}
+                handleClose={handleSubMenuClose}
+              />
+            )}
             {children}
           </AppContent>
         </AppContainer>

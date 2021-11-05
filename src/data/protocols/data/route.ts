@@ -6,12 +6,12 @@ export type Microfront = {
   url: string
 }
 
-export type Route = {
+export type RouteType = {
   id: number
   route: string
   microfrontend: Microfront
 }
 
-export type RouteData = {
-  items: Route[]
+export type RouteDataType = {
+  items: RouteType[]
 }

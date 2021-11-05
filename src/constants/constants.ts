@@ -30,9 +30,7 @@ const constants = {
     }
   },
   ROUTES: {
-    DASHBOARD: withPrefix('/'),
-    IDE: withPrefix('/ide'),
-    AUTH: withPrefix('/auth'),
+    DASHBOARD: '/',
     PAGE_NOT_FOUND: '/404',
     SERVER_ERROR: '/500',
     ADMINISTRATION_PROFILE: '/administration/profile',
@@ -120,30 +118,27 @@ const constants = {
   HOME_PROFILE_MFES: {
     TEAMS_AREA: {
       SYSTEM: {
-        url: process.env.NEXT_PUBLIC_TEAMS_AREA_MFE_URL,
+        url: process.env.TEAMS_AREA_MFE_URL,
         scope: 'administration_profile',
         module: './module',
-        component: 'administration-profile'
-      },
-      COMPONENT: 'TeamsArea'
+        component: 'TeamsArea'
+      }
     },
     SETUP_DASHBOARD: {
       SYSTEM: {
-        url: process.env.NEXT_PUBLIC_SETUP_DASHBOARD_MFE_URL,
+        url: process.env.SETUP_DASHBOARD_MFE_URL,
         scope: 'administration_profile',
         module: './module',
-        component: 'administration-profile'
-      },
-      COMPONENT: 'SetupDashboard'
+        component: 'SetupDashboard'
+      }
     },
     CATALOG: {
       SYSTEM: {
-        url: process.env.NEXT_PUBLIC_SETUP_CATALOG_SYSTEM_URL,
+        url: process.env.SETUP_CATALOG_SYSTEM_URL,
         scope: 'catalog',
         module: './module',
-        component: '@orange/stacklifecycle-catalog'
-      },
-      COMPONENT: 'WidgetHome'
+        component: 'WidgetHome'
+      }
     }
   }
 }

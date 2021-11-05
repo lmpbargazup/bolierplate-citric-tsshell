@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Icon, Text } from 'citric'
+import { goTo } from 'core/history/history'
 import React, { Fragment, useEffect, useState } from 'react'
+import { useLocation } from 'react-router'
 import { Horizontal } from '../../components/spacings/horizontal/horizontal'
 import { Vertical } from '../../components/spacings/vertical/vertical'
 import strings from '../../constants/strings'
 import { MenuModule } from '../../data/protocols/data/menu'
-import { pathCleaner } from '../../utils/strings'
-import { history } from '../history/history'
 import {
   CloseButtonContainer,
   Container,
@@ -28,18 +29,17 @@ export const SubMenu: React.FC<SubMenuProps> = ({
   menuOptionSelected
 }: SubMenuProps) => {
   const [selectedContext, setSelectedContext] = useState(0)
+  const { pathname } = useLocation()
 
   const { CLOSE } = strings.CONTAINERS.SUB_MENU
 
   const handleMenuItemClick = (route: string): void => {
-    history.push(route)
+    goTo(route)
     handleClose()
   }
 
   const verifyIsActiveRoute = (contextRoute?: string): string => {
-    return pathCleaner(history.asPath) === contextRoute
-      ? 'color.primary.main'
-      : 'color.base.b10'
+    return pathname === contextRoute ? 'color.primary.main' : 'color.base.b10'
   }
 
   const getIcon = (contextId?: number): string =>
@@ -52,8 +52,8 @@ export const SubMenu: React.FC<SubMenuProps> = ({
 
   useEffect(() => {
     const contexts = menuOptionSelected.contexts
-    contexts.forEach((context) => {
-      if (history.asPath.includes(context.route)) {
+    contexts?.forEach((context) => {
+      if (pathname.includes(context.route)) {
         setSelectedContext(context.id)
       }
     })

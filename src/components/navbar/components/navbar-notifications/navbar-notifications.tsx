@@ -145,7 +145,7 @@ export const NavbarNotifications: React.FC = () => {
 
   const handleClickSolveButton = (path: string): void => {
     setShowDropdown(false)
-    console.log(path)
+    // console.log(path)
     // history.push(path)
   }
 
